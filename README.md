@@ -31,7 +31,7 @@ ssh telebot.webserva.com -L6333:127.0.0.1:6379
 ```
 We can use `redis-cli` to subscribe too, for monitoring and debugging purposes.
 ```
-redis-cli -p 6333 subscribe telebot:$secret
+redis-cli -p 6333 subscribe telebot:$SECRET
 ```
 
 For your own Telebot deployment, invoke `https://api.telegram.org/botTOKEN/setWebhook` with your deployment URL.
