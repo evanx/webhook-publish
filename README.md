@@ -4,11 +4,11 @@ Simple webhook server, intended for incoming updates from Telegram, published vi
 
 This enables your bot server to receive webhook updates via Redis pubsub as follows:
 ```
-    const client = redis.createClient(redisURL);
+    const client = redis.createClient(config.redisURL);
     client.on('message', (channel, message) => {
        logger.debug({channel, message});
     });
-    client.subscribe('telebot:' + config.webhook);
+    client.subscribe('telebot:' + config.webhookSecret);
 ```
 where the configured `redisURL` might be a generic remote "Telebot" server using this microservice.
 
