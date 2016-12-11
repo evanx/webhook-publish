@@ -5,7 +5,7 @@ Simple webhook server for JSON HTTP POST requests, to be published via Redis pub
 It is intended for incoming updates from Telegram.org bots.
 
 This enables your bot server to receive webhook updates via Redis pubsub as follows:
-```
+```javascrpt
     const client = redis.createClient(config.redisURL);
     client.on('message', (channel, message) => {
        logger.debug({channel, message});
@@ -18,10 +18,10 @@ This is useful for development insomuch as you can use ssh port forwarding to th
 
 For example, it's deployed at least for my own purposes on `telebot.webserva.com.` 
 
-```
+```shell
 curl -s https://telebot.webserva.com/echo/testing | jq '.'
 ```
-```
+```json
 {
   "url": "/echo/testing"
 }
@@ -31,7 +31,7 @@ For your own Telebot deployment, invoke `https://api.telegram.org/botTOKEN/setWe
 
 The path of URL would `/webhook/SECRET` where you might generate a random `SECRET` as follows.
 
-```
+```shell
 dd if=/dev/random bs=32 count=1 2>/dev/null | sha1sum | cut -f1 -d' '
 ```
 
