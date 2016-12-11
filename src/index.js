@@ -29,8 +29,6 @@ async function start() {
         ctx.body = JSON.stringify({url: ctx.request.url});
     });
     api.post('/webhook/*', async ctx => {
-        ctx.body = '';
-        logger.debug('webhook', ctx.request.url, JSON.stringify(ctx.request.body, null, 2));
         multiExecAsync(client, multi => {
             multi.publish([config.redisName, ctx.params[0]].join(':'), JSON.stringify(ctx.request.body));
         });
