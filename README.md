@@ -14,7 +14,7 @@ This enables your bot server to receive webhook updates via Redis pubsub as foll
 ```
 where the configured `redisURL` might be a generic remote "Telebot" server using this microservice.
 
-For example, it's deployed at least for my own purposes on `telebot.webserva.com.` 
+For example, it's deployed at least for my own purposes on `telebot.webserva.com.`
 
 ```shell
 curl -s https://telebot.webserva.com/echo/testing | jq '.'
@@ -28,6 +28,10 @@ curl -s https://telebot.webserva.com/echo/testing | jq '.'
 This is useful for development insomuch as you can use ssh port forwarding to the remote Redis instance, to effectively receive webhook notifications from live Telegram.org bots onto your development machine.
 ```shell
 ssh telebot.webserva.com -L6777:127.0.0.1:6379
+```
+We can use `redis-cli` to subscribe too, for monitoring and debugging purposes.
+```
+redis-cli -p 6777 subscribe telebot:$secret
 ```
 
 For your own Telebot deployment, invoke `https://api.telegram.org/botTOKEN/setWebhook` with your deployment URL.
