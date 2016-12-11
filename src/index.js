@@ -13,7 +13,7 @@ const state = {};
 const redis = require('redis');
 const client = Promise.promisifyAll(redis.createClient());
 
-const config = require(process.env.config);
+const config = require(process.env.configFile || '../config/' + process.env.NODE_ENV);
 
 const logger = require('winston');
 logger.level = config.loggerLevel || 'info';
