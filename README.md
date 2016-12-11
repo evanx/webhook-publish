@@ -12,7 +12,7 @@ This enables your bot server to receive webhook updates via Redis pubsub as foll
     });
     client.subscribe('telebot:' + config.webhookSecret);
 ```
-where the configured `redisURL` might be a generic remote "Telebot" server using this microservice.
+where the configured `redisURL` would be the remote Redis instance also connected to the live HTTPS server deployment of this microservice.
 
 For example, it's deployed at least for my own purposes on `telebot.webserva.com.`
 
