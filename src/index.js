@@ -36,7 +36,7 @@ async function start() {
     app.use(bodyParser());
     app.use(api.routes());
     app.use(async ctx => {
-       ctx.statusCode = 501;
+       ctx.statusCode = 404;
     });
     state.server = app.listen(config.port);
 }
