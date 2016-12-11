@@ -32,7 +32,7 @@ async function start() {
         ctx.body = '';
         logger.debug('webhook', ctx.request.url, JSON.stringify(ctx.request.body, null, 2));
         multiExecAsync(client, multi => {
-            multi.publish([config.serviceName, ctx.params[0]].join(':'), JSON.stringify(ctx.request.body));
+            multi.publish([config.redisName, ctx.params[0]].join(':'), JSON.stringify(ctx.request.body));
         });
     });
     app.use(bodyParser());
