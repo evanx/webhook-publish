@@ -27,11 +27,11 @@ curl -s https://telebot.webserva.com/echo/testing | jq '.'
 
 This is useful for development insomuch as you can use ssh port forwarding to the remote Redis instance, to effectively receive webhook notifications from live Telegram.org bots onto your development machine.
 ```shell
-ssh telebot.webserva.com -L6777:127.0.0.1:6379
+ssh telebot.webserva.com -L6333:127.0.0.1:6379
 ```
 We can use `redis-cli` to subscribe too, for monitoring and debugging purposes.
 ```
-redis-cli -p 6777 subscribe telebot:$secret
+redis-cli -p 6333 subscribe telebot:$secret
 ```
 
 For your own Telebot deployment, invoke `https://api.telegram.org/botTOKEN/setWebhook` with your deployment URL.
