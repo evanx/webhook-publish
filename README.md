@@ -10,7 +10,7 @@ This enables your bot server to receive webhook updates via Redis pubsub as foll
     client.on('message', (channel, message) => {
        logger.debug({channel, message});
     });
-    client.subscribe('telebot:' + WEBHOOK_SECRET);
+    client.subscribe(`telebot:${WEBHOOK_SECRET}`);
 ```
 where the configured `REDIS_URL` would be the remote Redis instance also connected to the live HTTPS server deployment of this microservice.
 
@@ -31,20 +31,20 @@ ssh telebot.webserva.com -L6333:127.0.0.1:6379
 ```
 We can use `redis-cli` to subscribe too, for monitoring and debugging purposes.
 ```
-redis-cli -p 6333 subscribe telebot:$WEBHOOK_SECRET
+redis-cli -p 6333 subscribe "telebot:${WEBHOOK_SECRET}"
 ```
 
 For your own Telebot deployment, invoke `https://api.telegram.org/botTOKEN/setWebhook` with your deployment URL.
 
 It also simplifies production of multiple Telegram bots, which each are "hooked up" via a Redis connection, i.e. requiring minimal configuration. The HTTPS server requires Certbot and Nginx, but is a single generic deployment, i.e. done once only and reused e.g. `telebot.webserva.com` in my personal case.
 
-The path of URL would `/webhook/WEBHOOK_SECRET` where you might generate a random `WEBHOOK_SECRET` as follows.
+The path of URL would `/webhook/${WEBHOOK_SECRET}` where you might generate a random `WEBHOOK_SECRET` as follows.
 
 ```shell
 dd if=/dev/random bs=32 count=1 2>/dev/null | sha1sum | cut -f1 -d' '
 ```
 
-Your bot should then subscribe to the Redis channel `telebot:WEBHOOK_SECRET` in order to receive these updates via Telegram.org webhook.
+Your bot should then subscribe to the Redis channel `telebot:${WEBHOOK_SECRET}` in order to receive these updates via Telegram.org webhook.
 
 Note that your bot would reply to chat commands directly using https://api.telegram.org/botTOKEN/sendMessage`
 
