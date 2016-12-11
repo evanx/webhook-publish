@@ -1,6 +1,6 @@
 module.exports = {
     port: 8801,
-    redisName: 'evanx:webhook-publish',
+    redisName: 'telebot',
     loggerLevel: 'debug'
 };
 
