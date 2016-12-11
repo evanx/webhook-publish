@@ -5,7 +5,7 @@ Simple webhook server for JSON HTTP POST requests, to be published via Redis pub
 It is intended for incoming updates from Telegram.org bots.
 
 This enables your bot server to receive webhook updates via Redis pubsub as follows:
-```javascrpt
+```javascript
     const client = redis.createClient(config.redisURL);
     client.on('message', (channel, message) => {
        logger.debug({channel, message});
