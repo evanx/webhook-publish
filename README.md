@@ -36,6 +36,8 @@ redis-cli -p 6777 subscribe telebot:$secret
 
 For your own Telebot deployment, invoke `https://api.telegram.org/botTOKEN/setWebhook` with your deployment URL.
 
+It also simplifies production of multiple Telegram bots, which each are "hooked up" via a Redis connection, i.e. requiring minimal configuration. The HTTPS server requires Certbot and Nginx, but is a single generic deployment, i.e. done once only and reused e.g. `telebot.webserva.com` in my personal case.
+
 The path of URL would `/webhook/SECRET` where you might generate a random `SECRET` as follows.
 
 ```shell
