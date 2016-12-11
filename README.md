@@ -1,6 +1,18 @@
 # webhook-publish
 
-Simple webhook server, intended for incoming updates from Telegram, published via Redis.
+Simple webhook server, intended for incoming updates from Telegram, published via Redis pubsub.
+
+This enables your bot server to receive webhook updates via Redis pubsub as follows:
+```
+    const client = redis.createClient(redisURL);
+    client.on('message', (channel, message) => {
+       logger.debug({channel, message});
+    });
+    client.subscribe('telebot:' + config.webhook);
+```
+where the configured `redisURL` might be a generic remote "Telebot" server using this microservice.
+
+This is useful for development insomuch as you can use ssh port forwarding to the remote Redis instance, to receive webhooks from Telegram bots to your `localhost.`
 
 For example, it's deployed at least for my own purposes on `telebot.webserva.com.` 
 
