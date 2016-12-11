@@ -13,20 +13,16 @@ const state = {};
 const redis = require('redis');
 const client = Promise.promisifyAll(redis.createClient());
 
+const config = require(process.env.config);
+
+const logger = require('winston');
+logger.level = config.loggerLevel || 'info';
+
 async function multiExecAsync(client, multiFunction) {
    const multi = client.multi();
    multiFunction(multi);
    return Promise.promisify(multi.exec).call(multi);
 }
-
-const config = {
-    port: 8765,
-    serviceName: 'telebot',
-    loggerLevel: 'debug'
-};
-
-const logger = require('winston');
-logger.level = config.loggerLevel || 'info';
 
 async function start() {
     api.get('/echo/*', async ctx => {
