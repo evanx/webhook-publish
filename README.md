@@ -1,6 +1,8 @@
 # webhook-publish
 
-Simple webhook server, intended for incoming updates from Telegram, published via Redis pubsub.
+Simple webhook server for JSON HTTP POST requests, to be published via Redis pubsub.
+
+It is intended for incoming updates from Telegram.org bots.
 
 This enables your bot server to receive webhook updates via Redis pubsub as follows:
 ```
