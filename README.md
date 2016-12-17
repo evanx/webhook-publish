@@ -34,7 +34,9 @@ We can use `redis-cli` to subscribe too, for monitoring and debugging purposes.
 redis-cli -p 6333 subscribe "telebot:${WEBHOOK_SECRET}"
 ```
 
-For your bot `TOKEN` use `https://api.telegram.org/botTOKEN/setWebhook` with your HTTPS deployment URL.
+For your bot `TOKEN` use `https://api.telegram.org/botTOKEN/setWebhook` with your HTTPS deployment URL. In my case, this is 
+```curl https://api.telegram.org/botTOKEN/setWebhook?url=https://telebot.webserva.com/webhook/SECRET
+```
 
 This service simplifies production for multiple Telegram bots, since each is "hooked up" via a Redis connection, i.e. requiring minimal configuration. The HTTPS server requires Certbot and Nginx, but is a single generic deployment, i.e. done once only and reused e.g. `telebot.webserva.com` in my personal case.
 
