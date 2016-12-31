@@ -58,3 +58,5 @@ Your bot should then subscribe to the Redis channel `telebot:${WEBHOOK_SECRET}` 
 Note that your bot would reply to chat commands directly using https://api.telegram.org/botTOKEN/sendMessage`
 
 where the `TOKEN` for your bot is provided by @BotFather when you use the commands `/newbot` or `/token`
+
+See more documentation on the related project https://github.com/evanx/webhook-push
