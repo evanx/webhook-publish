@@ -47,6 +47,12 @@ The path of URL would `/webhook/${WEBHOOK_SECRET}` where you might generate a ra
 dd if=/dev/random bs=32 count=1 2>/dev/null | sha1sum | cut -f1 -d' '
 ```
 
+Alternatively see my http://github.com/evanx/secret-base56 
+```
+docker build -t secret-base56 https://github.com/evanx/secret-base56.git
+docker run -e length=40 secret-base56
+```
+
 Your bot should then subscribe to the Redis channel `telebot:${WEBHOOK_SECRET}` in order to receive these updates via Telegram.org webhook.
 
 Note that your bot would reply to chat commands directly using https://api.telegram.org/botTOKEN/sendMessage`
