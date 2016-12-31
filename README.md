@@ -59,4 +59,34 @@ Note that your bot would reply to chat commands directly using `api.telegram.org
 
 where the `TOKEN` for your bot is provided by @BotFather when you use the commands `/newbot` or `/token`
 
-See more documentation via the related project https://github.com/evanx/webhook-push
+For example:
+
+```javascript
+async function sendTelegram(chatId, format, ...content) {
+    logger.debug('sendTelegram', chatId, format, content);
+    try {
+        const text = lodash.trim(lodash.flatten(content).join(' '));
+        assert(chatId, 'chatId');
+        let uri = `sendMessage?chat_id=${chatId}`;
+        uri += '&disable_notification=true';
+        if (format === 'markdown') {
+            uri += `&parse_mode=Markdown`;
+        } else if (format === 'html') {
+            uri += `&parse_mode=HTML`;
+        }
+        uri += `&text=${encodeURIComponent(text)}`;
+        const url = `https://api.telegram.org/bot${config.token}/${uri}`;
+        const res = await fetch(url);
+        if (res.status !== 200) {
+            logger.warn('sendTelegram', chatId, url);
+        }
+    } catch (err) {
+        logger.error('sendTelegram', err);
+    }
+}
+```
+
+### Related 
+
+https://github.com/evanx/webhook-push - webhooks pushed to persistent list rather than Redis pubsub
+
