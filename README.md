@@ -59,4 +59,4 @@ Note that your bot would reply to chat commands directly using `api.telegram.org
 
 where the `TOKEN` for your bot is provided by @BotFather when you use the commands `/newbot` or `/token`
 
-See more documentation on the related project https://github.com/evanx/webhook-push
+See more documentation via the related project https://github.com/evanx/webhook-push
